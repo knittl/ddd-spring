@@ -1,18 +1,14 @@
 package at.appicenter.ddd.spring;
 
-import at.appicenter.ddd.spring.services.*;
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.extension.*;
 import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.*;
-import org.springframework.context.annotation.*;
-import org.springframework.test.context.*;
 import org.springframework.test.context.junit.jupiter.*;
 
-@ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = CustomBeanNameTest.Config.class)
+@SpringJUnitConfig(CustomBeanNameTest.class)
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
+@EnableApplicationServices
 class CustomBeanNameTest {
     @Autowired
     ApplicationContext applicationContext;
@@ -29,10 +25,5 @@ class CustomBeanNameTest {
         Assertions.assertThrows(
                 NoSuchBeanDefinitionException.class,
                 () -> applicationContext.getBean("dummyApplicationService"));
-    }
-
-    @Configuration
-    @EnableApplicationServices
-    public static class Config {
     }
 }
