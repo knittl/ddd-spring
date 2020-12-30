@@ -51,11 +51,10 @@ public @interface EnableApplicationServices {
      */
     Class<?>[] basePackageClasses() default {};
 
-    class Registrar implements ImportBeanDefinitionRegistrar, EnvironmentAware {
-        private Environment environment;
+    class Registrar implements ImportBeanDefinitionRegistrar {
+        private final Environment environment;
 
-        @Override
-        public void setEnvironment(final Environment environment) {
+        public Registrar(final Environment environment) {
             this.environment = environment;
         }
 
